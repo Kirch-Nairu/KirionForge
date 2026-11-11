@@ -2,8 +2,8 @@
 
 **An evidence-led engineering governance harness for human operators, AI maintainers, implementation workers, and independent reviewers.**
 
-> Version: Maintainer Gate R1 · 2026-11-11  
-> Status: Initial working standard. This repository is governance documentation, not an executable framework, certification, or claim of proven reliability. Adoption for each project requires the Engineer/Operator's authorization.
+> Current established baseline: Maintainer Gate R1 · 2026-11-11  
+> **R2-001 branch status: PROPOSED / NOT ADOPTED.** This draft revises authorization and feature-acceptance boundaries. The existing standard remains authoritative for active projects until their Engineer explicitly adopts an accepted revision. This repository is governance documentation, not executable verification or a reliability certification.
 
 ## Why this exists
 
@@ -13,7 +13,9 @@ KirionForge closes the **maintainer readiness gap** between an operator's featur
 
 ## The operating chain
 
-**OPERATOR SPECIFICATION → MAINTAINER DISCOVERY → CONTRACT RECONCILIATION → GO / CONDITIONAL GO / NO-GO → SINGLE-WRITER IMPLEMENTATION → TARGETED TESTS → INDEPENDENT REVIEW → OPERATOR ACCEPTANCE**
+**FEATURE INTENT → RISK-SCALED READINESS + GO → OWNED WRITER SLICES + LOCAL CHECKS → EARLY ISOLATED INTEGRATION → INDEPENDENT INTEGRATED-FEATURE REVIEW → FEATURE ACCEPTANCE → SEPARATE ENGINEER RELEASE AUTHORIZATION**
+
+Worker session completion is a **handoff/evidence event**, not an acceptance gate. Critical security, financial, retained-data and irreversible-change boundaries retain early focused review and negative verification before unsafe integration. A feature's code may be integrated into an isolated, **unaccepted** candidate; stable or production promotion is never implied.
 
 The conversation is not the system of record. The **versioned feature contract, evidence record, exact Git revision, and explicit decisions** are.
 
@@ -26,6 +28,7 @@ The conversation is not the system of record. The **versioned feature contract, 
 | [Context & Evidence](docs/03-CONTEXT-AND-EVIDENCE.md) | Anti-drift rules, provenance, claims and rehydration |
 | [Dynamic Rework](docs/04-DYNAMIC-REWORK.md) | Severity, classification, interruption policy and bounded repair |
 | [Measurement](docs/05-MEASUREMENT.md) | How to measure escapes and rework without invented statistics |
+| [R2 Pilot & Compatibility](docs/06-R2-PILOT-AND-COMPATIBILITY.md) | Proposed replacement boundaries, compatibility and two sanitized pilot scenarios; not operational adoption |
 | [Feature Contract](templates/FEATURE-CONTRACT.md) | Operator-provided, versioned intended behavior |
 | [Readiness Decision](templates/READINESS-DECISION.md) | Maintainer evidence and executable authorization |
 | [Rework Record](templates/REWORK-RECORD.md) | Triage for defects versus missing requirements |
@@ -36,12 +39,13 @@ The conversation is not the system of record. The **versioned feature contract, 
 
 1. **No implementation authorization from symptoms alone** when business behavior, permissions, money, lifecycle or persistence remain undefined.
 2. **Unknown is not approved.** Maintain separate labels for observed, code-verified, test-verified, operator-approved, inferred, unknown and superseded claims.
-3. **One implementation writer per bounded change.** Reviewer findings do not authorize competing edits.
+3. **One active writer per owned change/path.** Multiple independent slices may run concurrently only with safe interface and ownership boundaries; independent reviewers do not become competing writers.
 4. **Protect existing invariants.** Every feature contract includes what must not change.
 5. **Risk determines gate depth.** A narrow, demonstrable bug may use an abbreviated gate; a financial or authorization-sensitive workflow may not.
-6. **Reviews validate the frozen contract and changed risk surface.** New requirements are returned for operator decision, not silently implemented.
+6. **Independent judgment validates the frozen integrated feature and relevant critical pre-integration boundaries.** Local mechanical checks repeat as needed; a session end does not mandate formal review. New requirements return for operator decision, not silent implementation.
 7. **No manufactured confidence rates.** Rework percentages and success probabilities require measured denominators and explicit methods.
-8. **No release from green tests alone.** Integration, environment and operator acceptance are distinct gates.
+8. **No release from green tests alone.** Local green, integrated green, independent acceptance, installed/QA evidence and operator release approval are distinct claims.
+9. **No duplicate governance dependency for routine progress.** One durable, attributed feature contract/authorization plus issue/PR evidence suffices for ordinary handbacks; do not require a separate docs-only merge for every session or reviewer transition.
 
 ## What KirionForge is not
 
@@ -51,7 +55,7 @@ This public repository must contain **only sanitized examples**. Never copy priv
 
 ## Governance change rule
 
-Changes to the maintainer gate are proposed as versioned documentation changes. A change to policy does **not** retroactively alter an active worker assignment. The operator or technical authority decides when a new version takes effect.
+Changes to the maintainer gate are proposed as versioned documentation changes. A change to policy does **not** retroactively alter an active worker assignment, other repository's START/CLOSE protocol, or release authorization. This R2-001 proposal requires independent review, a bounded pilot, and explicit Engineer adoption before it becomes operational authority.
 
 **Owner of business intent and release authority:** Human Engineer/Operator.  
 **Owner of implementation readiness and evidence quality:** Maintainer.
