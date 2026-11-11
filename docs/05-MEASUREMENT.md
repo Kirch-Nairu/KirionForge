@@ -14,10 +14,10 @@ Neither a proposed "60% dynamic-rework failure rate" nor an AI-generated "75–8
 
 | Metric | Formula | Why it matters |
 | --- | --- | --- |
-| Readiness escape rate | GO missions with material missing contract/requirement discovered post-GO ÷ all GO missions | Maintainer quality |
-| First-pass review acceptance | Frozen candidate accepted on its first independent review ÷ candidates receiving a first review | End-to-end handoff quality |
-| Worker implementation defect rate | Missions with source behavior violating an explicit approved contract ÷ reviewed missions | Worker quality |
-| Test coverage escape rate | Missions with material approved behavior untested at first freeze ÷ reviewed missions | Acceptance design |
+| Readiness escape rate | GO feature revisions with material missing contract/requirement discovered after GO ÷ all GO feature revisions | Maintainer quality |
+| First-pass integrated acceptance | Frozen integrated feature candidate accepted on first independent feature review ÷ integrated features receiving first review | Feature readiness / review quality |
+| Worker implementation defect rate | Reviewed features with source behavior violating an explicit approved contract ÷ reviewed features | Worker quality |
+| Test coverage escape rate | Reviewed integrated features with material approved behavior untested at first freeze ÷ reviewed integrated features | Acceptance design |
 | Rework cycles per feature | Returned material findings/rework rounds per completed feature | Rework burden |
 | Accepted-feature lead time | Timestamp of integrated feature acceptance minus original approved GO timestamp; report holds separately | End-to-end throughput |
 | Manual authority interventions | Distinct human decisions or manual relays per feature, by reason | Engineer coordination burden |
@@ -25,8 +25,8 @@ Neither a proposed "60% dynamic-rework failure rate" nor an AI-generated "75–8
 | Governance-only transitions | Number of mandatory docs-only merges, duplicate crosslinks or state-publication holds per feature | Avoidable bureaucracy |
 | Integration defect/reconciliation count | Material compatibility, collision and failed integrated tests with source attribution | Late integration risk |
 | Client-alignment rework count | Approved work materially revised because actual client-visible intent was missed or changed; identify which | Product alignment risk |
-| Late operator decision rate | Missions requiring an operator policy decision after GO ÷ GO missions | Readiness quality |
-| Installed acceptance escape rate | Missions with defects discovered in installed/manual QA after source review acceptance ÷ missions reaching installed QA | Runtime realism |
+| Late operator decision rate | GO feature revisions requiring an operator policy decision after GO ÷ GO feature revisions | Readiness quality |
+| Installed acceptance escape rate | Features with defects discovered in installed/manual QA after source review acceptance ÷ features reaching installed QA | Runtime realism |
 
 Use separate severity bands. Do not treat a test-fixture mistake as an accounting code defect, or mix authorized scope changes with unplanned corrections.
 
