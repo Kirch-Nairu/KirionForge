@@ -18,7 +18,8 @@ Compact, factual state transfer for an AI context reset, new maintainer, writer 
 - Last event: SESSION_HANDOFF / COMMIT_PUSHED / LOCAL_TEST / INTEGRATED / REVIEWED / OTHER (not automatically a state transition)
 - Approved GO / authority link (reuse until materially changed):
 - Integrated candidate SHA (if any):
-- Risk tier and active pre-integration hold (if any):
+- Risk tier (LOW / MEDIUM / HIGH / CRITICAL) and active pre-integration hold (if any):
+- Matching nonauthor clearance type / reviewer / reviewed slice SHA / observed negative tests (if held):
 - Active sole implementation writer:
 - Independent reviewer:
 - Protected invariants:
