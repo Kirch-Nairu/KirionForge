@@ -69,16 +69,17 @@ Risk is based on plausible consequences, not diff size or perceived implementati
 
 A NO-GO must say exactly **which missing decision/evidence** blocks work and **how to close it**. Do not create arbitrary paperwork or infinite research.
 
-## Mandatory decision output
+## Proportionate decision output
 
-Use [Readiness Decision](../templates/READINESS-DECISION.md) with:
+Use [Readiness Decision](../templates/READINESS-DECISION.md), **abbreviated for LOW changes** and expanded only for material affected risks, with:
 
-1. Current source SHA and contract revision.
-2. Claims table: approved / verified / inferred / unknown, each with provenance.
-3. Explicit authorized and forbidden scope.
-4. Affected components and protected invariants.
-5. Executable acceptance matrix, including negative tests and manual/installed gaps.
-6. GO / CONDITIONAL GO / NO-GO and accountable sign-off.
+1. Feature ID, approved contract revision and exact source baseline SHA.
+2. Evidence for consequential approved, verified and UNKNOWN claims; no invented checklist entries for irrelevant domains.
+3. Authorized and forbidden scope, writer path ownership and critical pre-integration holds.
+4. Relevant dependencies, protected invariants, positive/negative acceptance, and actual runnable versus manual/installed gaps.
+5. GO / CONDITIONAL GO / NO-GO plus attributable Engineer authorization; identify what would invalidate it.
+
+A routine continuation within the same approved feature does not need a fresh full readiness packet.
 
 **No implicit GO from a completed checklist.** A decision record/approved contract plus an accountable Engineer authorization is the permission to assign implementation. Do not impose a separate issue START, canonical-main memory PR, and verification comment as additional universal preconditions. The existing issue/PR and durable contract/evidence pointer are sufficient for routine transitions in this proposed standard. This change does not override another project's currently active protocol.
 
