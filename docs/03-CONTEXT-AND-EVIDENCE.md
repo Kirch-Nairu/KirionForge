@@ -1,21 +1,23 @@
 # 03 — Context Integrity & Evidence Discipline
 
+> **R2-001 DRAFT / NOT ADOPTED.** Evidence and authority are retained; routine work does not require duplicate publication transactions.
+
 ## The problem
 
 AI context windows, conversation summaries and agent handoffs are useful transports, **not an authoritative project database**. Over long work, a source fact can be compressed, detached from its revision, repeated as a conclusion, then mistaken for an approved requirement. Confidence and fluency do not prevent this.
 
 ## Durable sources of truth
 
-Maintain separate, versioned records:
+Maintain distinct **facts and decision types** in linked durable sources, not necessarily six separately committed files or approval packages:
 
 1. **Feature Contract:** Operator-approved intended business behavior.
 2. **Readiness Decision:** Maintainer's verified current-code map, unknowns and execution scope.
-3. **Implementation/PR:** Actual source diff at exact SHA and test evidence.
-4. **Review Record:** Findings, severity, scope and independent disposition.
-5. **Runtime/Acceptance Record:** Exact built/installed artifact and operator-observed result.
-6. **Rework Record:** Classification, revised authority and bounded rerun evidence.
+3. **Implementation/PR:** Actual source diff at exact SHA, owned paths, local mechanical checks and integrated candidate reference.
+4. **Review Record:** Risk-triggered early security findings and/or independent integrated feature judgment, with reviewed SHA and disposition.
+5. **Runtime/Acceptance Record:** Exact executable/installed artifact, relevant user journeys and operator-observed result.
+6. **Rework Record:** Classification, changed dependency surface, retained-valid evidence and bounded rerun proof.
 
-Conversations may point to these records; they do not replace them.
+Conversations may point to these records; they do not replace them. **A single issue/PR plus linked feature contract and evidence manifest may hold these records**; there is no universal requirement for an independently merged docs-only START/CLOSE on canonical main before each worker session, candidate handback, reviewer invocation or routine correction. A formal approval must remain explicit and attributable.
 
 ## Evidence labels
 
@@ -41,16 +43,24 @@ Never promote INFERRED to CODE_VERIFIED, TEST_VERIFIED or OPERATOR_APPROVED just
 
 Example claims are illustrative, **not actual approval**.
 
+## Minimal evidence manifest and state transfer
+
+At each meaningful feature boundary, retain: `feature_id`, `approved_contract_revision`, `authority_ref`, `baseline_sha`, `candidate_sha`, `integrated_sha` (if any), `owned_paths`, `risk_tier` (LOW/MEDIUM/HIGH/CRITICAL), `pre_integration_hold` and exact-SHA nonauthor `clearance` where applicable, `tests_run` (command/environment/exit/artifact), `tests_not_run`, `review_findings`, `open_blockers`, `next_owner_action`. Do not manufacture a SHA where the operation has not happened.
+
+A session handoff is a **delta event**, not a new GO/ACCEPT/RELEASE decision. Update the existing issue/PR or concise [Handoff Capsule](../templates/HANDOFF-CAPSULE.md) only when source, scope, evidence, blocker or next action changed; otherwise reuse the last verified pointer. Keep local and branch snapshots distinguishable from the currently authoritative contract and current Git ref.
+
+When references conflict, resolution order is: explicit current Engineer/authorized business decision for intent; approved contract revision for behavior; actual Git and executed evidence for implementation; linked reviewer/QA decisions for acceptance. A historical `SSOT_CURRENT` narrative or branch-local copy must not silently override newer verified decisions.
+
 ## Rehydration before making decisions
 
 At every context-window reset, new agent, long pause, revised branch, or conflicting summary:
 
-- Read the authoritative contract and readiness decision **from storage**.
-- Recheck actual source head and branch ancestry; do not reuse a historical SHA as current.
-- Load unresolved decisions and active rework records.
-- Verify who is the active writer and whether any work is frozen.
-- Identify old claims now SUPERSEDED.
-- Recreate a [Handoff Capsule](../templates/HANDOFF-CAPSULE.md) containing exact refs and open gates.
+- Read the latest authoritative contract revision, scope and GO/hold record from their durable links.
+- Recheck current source head and integration branch ancestry; do not reuse a historical SHA as current.
+- Load only affected unresolved decisions, dependency changes and active rework findings.
+- Verify path ownership, pending HIGH-protected/CRITICAL holds and which evidence remains valid.
+- Identify contradicted historical claims as SUPERSEDED, not as current decisions.
+- Rehydrate a compact [Handoff Capsule](../templates/HANDOFF-CAPSULE.md) from those pointers when actual context is needed; do not copy entire review histories.
 
 If a cited private source is inaccessible, label the claim UNVERIFIED in the current session. Do not silently pretend to have inspected it.
 
@@ -66,9 +76,9 @@ If a cited private source is inaccessible, label the claim UNVERIFIED in the cur
 
 ## Multi-agent write discipline
 
-One source writer per change. Reviewer is read-only unless operator explicitly reassigns the role. Never let two workers correct the same branch concurrently. Different models do not create independence unless their responsibilities and evidence are separated.
+One active source writer per owned path/change; multiple independent slices may proceed under the same feature authorization when collisions and shared contracts are controlled. A dedicated integration writer combines approved-to-integrate slices without granting acceptance. A reviewer is read-only for the code it assesses. Never let two writers correct the same branch or shared path concurrently. Different models do not create independence unless their responsibilities and evidence are separated.
 
-Review findings attach to **candidate SHA**; after a new commit, only unchanged relevant findings can be inherited. Runtime evidence remains tied to the build it tested.
+Local mechanical checks attach to each checked candidate SHA. Formal independent **feature** findings attach to the integrated SHA and approved contract revision; HIGH-protected/CRITICAL clearance records attach to the exact risk-bearing candidate and record whether a protected trust boundary was actually cleared. A blank or NOT_RUN clearance cannot be inferred from a green local build. After a new commit, inherit only evidence whose checked dependency paths and assumptions remain unchanged. Runtime evidence stays tied to the artifact/configuration it actually tested.
 
 ## Privacy
 
