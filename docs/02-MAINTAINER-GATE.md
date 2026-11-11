@@ -54,10 +54,11 @@ For each material behavior, require a positive case, denial/invalid case, edge/r
 | Risk | Examples | Gate depth |
 | --- | --- | --- |
 | LOW | Local text, narrow deterministic mapping with known consumers | Abbreviated gate; focused regression |
-| MODERATE | Role-specific UI, API mapping, shared state with bounded impact | Dependency trace + allow/deny and alternate-path tests |
-| CRITICAL | Auth/data exposure, payments, stock/AR/AP, irreversible states, retained-data migrations, offline sync | Full affected contract, actor/deny/replay/rollback tests, early nonauthor safety inspection before sensitive integration, independent integrated acceptance and separate release authority |
+| MEDIUM | Role-specific UI, CRUD/API mapping, shared state with bounded impact | Trace relevant consumers + allow/deny and alternate-path tests; final integrated primary journeys + contract assertions |
+| HIGH | Protected permissions/data, financial integrity, shared contracts, migrations or high-impact architecture | Full affected-contract and negative/replay checks. Set PRE_INTEGRATION_HOLD when the slice touches a protected trust boundary; independent clearance required before integration |
+| CRITICAL | High-consequence security/data, irreversible state, retained-data migrations, offline recovery or production impact | Explicit human risk authority, mandatory pre-integration clearance, full affected deny/replay/rollback tests and independent integrated/runtime acceptance before any release |
 
-Risk is based on plausible consequences, not diff size or perceived implementation difficulty.
+Risk is based on plausible consequences, not diff size or perceived implementation difficulty. Use **LOW / MEDIUM / HIGH / CRITICAL**, matching the existing Second Brain `risk-model.json` and `risk.js` mode names. Where the executable risk model is in use, preserve its task-type floors, critical triggers and outcome; do not reduce a HIGH or CRITICAL assessment to MEDIUM by prose. Historical `MODERATE` contracts are not silently remapped.
 
 ### G7 — Issue written decision
 
@@ -71,11 +72,11 @@ A NO-GO must say exactly **which missing decision/evidence** blocks work and **h
 
 ## Proportionate decision output
 
-Use [Readiness Decision](../templates/READINESS-DECISION.md), **abbreviated for LOW changes** and expanded only for material affected risks, with:
+Use [Readiness Decision](../templates/READINESS-DECISION.md) to select the [compact template](../templates/READINESS-DECISION-COMPACT.md) for LOW/MEDIUM bounded changes or the [full template](../templates/READINESS-DECISION-FULL.md) for HIGH/CRITICAL scopes or discovered protected dependencies, with:
 
 1. Feature ID, approved contract revision and exact source baseline SHA.
 2. Evidence for consequential approved, verified and UNKNOWN claims; no invented checklist entries for irrelevant domains.
-3. Authorized and forbidden scope, writer path ownership and critical pre-integration holds.
+3. Authorized and forbidden scope, writer path ownership, and any HIGH-protected/CRITICAL `PRE_INTEGRATION_HOLD`.
 4. Relevant dependencies, protected invariants, positive/negative acceptance, and actual runnable versus manual/installed gaps.
 5. GO / CONDITIONAL GO / NO-GO plus attributable Engineer authorization; identify what would invalidate it.
 
@@ -92,13 +93,21 @@ A routine continuation within the same approved feature does not need a fresh fu
 - "AI estimated 85% likely" is not a calibrated prediction.
 - Missing material inputs are not replaced by plausible narratives.
 
+## Discovered-risk tripwire and clearance ownership
+
+An already-approved feature GO does **not** authorize unknown permissions, financial rules, migrations or other protected behavior. When a worker or integrator discovers a new HIGH-protected or CRITICAL boundary, immediately set `PRE_INTEGRATION_HOLD=ACTIVE` on that slice, record the evidence and suspend relevant implementation/integration. The Maintainer reassesses the shared four-tier risk model and dependency map, and the Engineer (or separately authorized business owner) approves any materially changed business or risk authority. This **reopens GO for affected scope only**; unrelated independent work may continue if genuinely safe.
+
+The **independent nonauthor reviewer** owns the technical `SECURITY_CLEARANCE` (or `FINANCIAL_CLEARANCE` / `MIGRATION_CLEARANCE`) recommendation and must cite the exact source SHA, contract revision, reviewed paths and observed positive/deny/replay/rollback proof. The **Engineer** retains authority over any new policy or high-consequence risk decision. The **integration writer** must verify that attributable clearance is `PASS` for the live SHA and that mandatory checks actually ran, before combining the slice. An absent/stale `PASS`, unresolved denial, or `NOT_RUN` mandatory proof leaves the affected slice on HOLD. The reviewer may not clear authored code as its own nonauthor review.
+
+This record lives in the existing feature issue/PR evidence, not a new docs-only publication or additional per-session gate. An honest manual clearance contract is not itself an executable CI enforcement claim.
+
 ## Handling newly discovered material facts
 
 **Before execution:** Revise gate and contract before GO.
 
-**During execution:** Classify impact; interrupt only under the critical stop policy, otherwise checkpoint the discovery. A routine code fix within an approved contract needs no fresh GO. If the discovery changes authorized behavior, roles, money, privacy, state transitions or protected interfaces, update the contract version and reauthorize **only the affected scope** before modification. Preserve independent progress where safety and dependency isolation are demonstrated.
+**During execution:** Classify impact; interrupt only under the critical stop policy, otherwise checkpoint the discovery. A routine code fix within an approved contract needs no fresh GO. If the discovery changes authorized behavior, roles, money, privacy, state transitions or protected interfaces, suspend the affected slice immediately, update the contract version and reauthorize **only the affected scope** before modification. Where HIGH-protected/CRITICAL, complete nonauthor pre-integration clearance before the integrator combines it. Preserve independent progress where safety and dependency isolation are demonstrated.
 
-**After integrated frozen review:** Return bounded code defects to the responsible writer; return policy/contract gaps to maintainer + operator. Recheck changed dependencies and prior findings, not every unchanged candidate. Review cannot silently redefine intent. Critical pre-integration reviews are separate, risk-triggered controls rather than mandatory session-end reviews.
+**After integrated frozen review:** Return bounded code defects to the responsible writer; return policy/contract gaps to maintainer + operator. Recheck changed dependencies and prior findings, not every unchanged candidate; **rerun all defined primary journeys and feature-contract acceptance assertions for MEDIUM/HIGH/CRITICAL against the final integrated SHA**, including material denied paths. Do not exempt those journeys on a claimed isolated rework. Additional unrelated suites remain risk-based. Review cannot silently redefine intent. Critical pre-integration reviews are separate, risk-triggered controls rather than mandatory session-end reviews.
 
 ## Acceptance conditions for this gate itself
 
