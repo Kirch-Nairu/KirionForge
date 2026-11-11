@@ -58,7 +58,7 @@ At every context-window reset, new agent, long pause, revised branch, or conflic
 - Read the latest authoritative contract revision, scope and GO/hold record from their durable links.
 - Recheck current source head and integration branch ancestry; do not reuse a historical SHA as current.
 - Load only affected unresolved decisions, dependency changes and active rework findings.
-- Verify path ownership, pending critical holds and which evidence remains valid.
+- Verify path ownership, pending HIGH-protected/CRITICAL holds and which evidence remains valid.
 - Identify contradicted historical claims as SUPERSEDED, not as current decisions.
 - Rehydrate a compact [Handoff Capsule](../templates/HANDOFF-CAPSULE.md) from those pointers when actual context is needed; do not copy entire review histories.
 
