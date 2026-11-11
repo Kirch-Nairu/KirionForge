@@ -1,5 +1,7 @@
 # Rework Record — TEMPLATE
 
+> **R2-001 proposal:** this is a material-defect record, not a compulsory document at each session/candidate transition. Prefer the existing feature issue/PR; no fresh GO for a localized fix within the approved contract.
+
 - Rework ID:
 - Mission / PR:
 - Frozen candidate SHA:
@@ -47,9 +49,9 @@
 
 - New candidate SHA:
 - Tests / results / log paths:
-- Reviewer disposition:
+- Independent finding disposition (only when a formal review finding applies; otherwise NOT APPLICABLE):
 - Updated readiness decision / contract revision (if needed):
 - Operator acceptance required:
 - Status: OPEN / BLOCKED / VERIFIED / DEFERRED
 
-A rework record does not authorize an implementation outside the existing approved scope.
+A rework record does not authorize implementation outside the existing approved scope. Re-run invalidated tests and obtain targeted nonauthor closure of material prior findings; a new full-feature review or documentation-only acceptance PR is not automatic. Actual integrated feature acceptance remains at the frozen combined SHA.
