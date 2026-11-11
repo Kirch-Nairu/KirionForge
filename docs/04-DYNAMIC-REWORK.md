@@ -1,5 +1,7 @@
 # 04 — Dynamic Rework Protocol
 
+> **R2-001 DRAFT / NOT ADOPTED.** Rework remains bounded; formal judgment is triggered by feature/risk invalidation, not every session handback.
+
 A rework is not automatically evidence of an incapable worker. Classify **what failed**, **why its acceptance basis failed**, and **who owns the missing decision** before issuing another task.
 
 ## Classification and routing
@@ -36,7 +38,7 @@ If a new finding changes **the approved requirement**, revise contract and readi
 
 ## Bounded correction packet
 
-Every return to writer states:
+Every **material** return to a writer states the following in the existing issue/PR or concise correction record; a new issue, docs-only memory merge or duplicate approval document is not mandatory:
 
 1. Exact candidate SHA and contract revision.
 2. Symptom, actual evidence and failure class/severity.
@@ -53,9 +55,18 @@ Avoid "fix everything," unbounded audits and implementation by reviewer.
 - **Local error:** Affected test + directly coupled regression.
 - **Shared API/auth/model change:** Enumerate all consumers of changed permission/model, run positive and denial tests across roles.
 - **Money/state/persistence change:** Transaction, replay, compensation, audit and restart checks.
-- **At frozen acceptance:** One independent review on exact SHA and appropriate integration/manual checks.
+- **At critical pre-integration boundary:** Focused nonauthor inspection and negative tests before sensitive source can join isolated integration; repeat only if the risk-bearing contract or affected code changes.
+- **At integrated feature acceptance:** Independent review of the frozen integrated SHA and appropriate actual runtime/user journeys. A session-end, new commit or routine branch handback does not trigger formal review by itself.
 
 Never inherit a PASS for code that has changed on that test's dependency path. Never rerun all suites reflexively if a narrow test change is demonstrably isolated.
+
+## Re-review scope after rework
+
+- A localized code correction inside the approved contract gets focused self-validation and mechanical CI; it does **not** require a fresh maintainer GO.
+- If a formal independent finding is addressed, the nonauthor reviewer checks the changed defect/risk surface and its directly coupled regressions before declaring that finding closed. This can be a targeted follow-up on the **same integrated feature review**, not a new whole-feature acceptance cycle.
+- If source changes outside reviewed dependencies, preserve earlier accepted findings where still valid, then independently review the new affected surface. If critical trust/data/financial boundaries change, reopen the applicable pre-integration security hold.
+- If the approved business contract or protected invariant changes, obtain the specific Engineer/process-owner decision and reauthorize only affected scope. Keep safe independent work active.
+- After rework, only an updated integrated SHA and currently valid evidence can receive feature acceptance. Runtime/installed acceptance and release authorization remain separate.
 
 ## Review dispositions
 
@@ -71,4 +82,4 @@ Never inherit a PASS for code that has changed on that test's dependency path. N
 
 ## Closeout
 
-A rework closes only when the relevant test evidence and reviewer disposition are attached to a new frozen SHA, and any contract revision is recorded. Recurrent escapes feed [Measurement](05-MEASUREMENT.md); avoid retroactively rewriting the original gate record.
+A rework closes when affected tests pass and any required independent finding is resolved against the new exact SHA; unchanged evidence must not be relabeled as newly run. A new contract revision is recorded only if the authorized behavior changed. Recurrent escapes feed [Measurement](05-MEASUREMENT.md); avoid retroactively rewriting the original decision or adding acceptance ceremonies for context resets.
