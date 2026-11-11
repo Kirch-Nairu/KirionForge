@@ -1,6 +1,9 @@
 # Maintainer Readiness Decision — TEMPLATE
 
-- Mission ID:
+> R2-001 proposed use: **one GO for a feature/contract revision**, not one per worker session. The compact fields below are the baseline. Complete detailed evidence matrices proportionately for material and CRITICAL risks; do not turn irrelevant rows into compulsory paperwork.
+
+- Feature ID / client-visible outcome:
+- Mission ID (if distinct):
 - Operator feature contract and revision:
 - Technical authority:
 - Maintainer:
@@ -9,7 +12,20 @@
 - **Exact baseline SHA:**
 - Known installed/runtime artifact and hash (if relevant):
 - Related issues/PRs:
-- Risk tier: LOW / MODERATE / HIGH
+- Risk tier: LOW / MODERATE / CRITICAL
+
+## Minimal readiness record (all risk tiers)
+
+- **Approved contract revision + Engineer authorization reference:**
+- **Exact baseline SHA and bounded permitted paths:**
+- **Expected functional and denied behavior:**
+- **Protected invariants and dependent contracts:**
+- **Assigned writer(s), integration ownership, collision exclusions:**
+- **Locally executable checks, integrated acceptance plan, known NOT_RUN:**
+- **Unknowns that block or are expressly excluded:**
+- **GO / CONDITIONAL GO / NO-GO, signer and date:**
+
+If this record is complete for a truly LOW isolated change, the extended sections below may be marked `NOT APPLICABLE` with a short reason. For MODERATE/CRITICAL, supply every **material** affected dimension; irrelevant dimensions do not require invented detail.
 
 ## A. Evidence ledger
 
@@ -50,9 +66,11 @@ Mark each **VERIFIED, APPROVED, NOT APPLICABLE or UNKNOWN**. Provide evidence, n
 
 **Deferred work (CONDITIONAL GO only):**
 
-**Expected implementation branch and single writer:**
+**Expected slice branches, one writer per owned path, and integration owner:**
 
-**Reviewer (read-only role):**
+**Independent feature reviewer (read-only for the reviewed code; schedule at integrated acceptance):**
+
+**Additional critical pre-integration risk review / hold (if applicable):**
 
 **Required deliverables and evidence:**
 
@@ -84,4 +102,4 @@ Mark each **VERIFIED, APPROVED, NOT APPLICABLE or UNKNOWN**. Provide evidence, n
 
 **Operator approval (required for business-policy deviations and high-risk scope):**
 
-No worker receives implementation authority merely because this document exists. The decision must be explicit.
+No worker receives implementation authority merely because this document exists. The Engineer's applicable authority decision must be explicit and linked. Once GO is recorded, routine session transfers and bounded code fixes under the same contract do **not** require a new GO, docs-only PR, or formal review. A material authorization or protected-interface change reopens only its affected scope.
