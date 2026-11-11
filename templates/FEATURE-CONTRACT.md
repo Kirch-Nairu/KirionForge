@@ -1,6 +1,6 @@
 # Feature Contract — TEMPLATE
 
-> **R2-001 proposed use.** Copy this file into the target project's private issue/PR or documentation. For LOW isolated changes, use an abbreviated contract: observable outcome, exact baseline, owned scope, protected behavior, required tests and accountable approval. Mark irrelevant sections NOT APPLICABLE with reason; do not write fictitious business/data contracts merely to fill a template. For MODERATE/CRITICAL changes, complete the materially affected role, interface, state, data and negative-test dimensions. A blank **relevant** section is UNKNOWN, not implicitly approved. No separate docs-only merge is required solely to activate an already approved feature.
+> **R2-001 proposed use.** Copy this file into the target project's private issue/PR or documentation. For LOW isolated changes, use an abbreviated contract: observable outcome, exact baseline, owned scope, protected behavior, required tests and accountable approval. Mark irrelevant sections NOT APPLICABLE with reason; do not write fictitious business/data contracts merely to fill a template. For MEDIUM/HIGH/CRITICAL changes, complete the materially affected role, interface, state, data and negative-test dimensions. The Second Brain model has four tiers; protected HIGH/CRITICAL changes require an attributable pre-integration clearance. A blank **relevant** section is UNKNOWN, not implicitly approved. No separate docs-only merge is required solely to activate an already approved feature.
 
 - Feature / contract ID:
 - Contract revision:
