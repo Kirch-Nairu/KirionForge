@@ -14,7 +14,7 @@
 - Related issues/PRs:
 - Risk tier: HIGH / CRITICAL (Second Brain four-tier model; record actual tool-derived mode where available)
 
-## Minimal readiness record (all risk tiers)
+## Required readiness and clearance record (HIGH / CRITICAL)
 
 - **Approved contract revision + Engineer authorization reference:**
 - **Exact baseline SHA and bounded permitted paths:**
