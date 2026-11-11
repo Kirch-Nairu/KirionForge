@@ -45,7 +45,7 @@ Example claims are illustrative, **not actual approval**.
 
 ## Minimal evidence manifest and state transfer
 
-At each meaningful feature boundary, retain: `feature_id`, `approved_contract_revision`, `authority_ref`, `baseline_sha`, `candidate_sha`, `integrated_sha` (if any), `owned_paths`, `risk_tier`, `tests_run` (command/environment/exit/artifact), `tests_not_run`, `review_findings`, `open_blockers`, `next_owner_action`. Do not manufacture a SHA where the operation has not happened.
+At each meaningful feature boundary, retain: `feature_id`, `approved_contract_revision`, `authority_ref`, `baseline_sha`, `candidate_sha`, `integrated_sha` (if any), `owned_paths`, `risk_tier` (LOW/MEDIUM/HIGH/CRITICAL), `pre_integration_hold` and exact-SHA nonauthor `clearance` where applicable, `tests_run` (command/environment/exit/artifact), `tests_not_run`, `review_findings`, `open_blockers`, `next_owner_action`. Do not manufacture a SHA where the operation has not happened.
 
 A session handoff is a **delta event**, not a new GO/ACCEPT/RELEASE decision. Update the existing issue/PR or concise [Handoff Capsule](../templates/HANDOFF-CAPSULE.md) only when source, scope, evidence, blocker or next action changed; otherwise reuse the last verified pointer. Keep local and branch snapshots distinguishable from the currently authoritative contract and current Git ref.
 
@@ -78,7 +78,7 @@ If a cited private source is inaccessible, label the claim UNVERIFIED in the cur
 
 One active source writer per owned path/change; multiple independent slices may proceed under the same feature authorization when collisions and shared contracts are controlled. A dedicated integration writer combines approved-to-integrate slices without granting acceptance. A reviewer is read-only for the code it assesses. Never let two writers correct the same branch or shared path concurrently. Different models do not create independence unless their responsibilities and evidence are separated.
 
-Local mechanical checks attach to each checked candidate SHA. Formal independent **feature** findings attach to the integrated SHA and approved contract revision; early critical security findings attach to the exact risk-bearing candidate. After a new commit, inherit only evidence whose checked dependency paths and assumptions remain unchanged. Runtime evidence stays tied to the artifact/configuration it actually tested.
+Local mechanical checks attach to each checked candidate SHA. Formal independent **feature** findings attach to the integrated SHA and approved contract revision; HIGH-protected/CRITICAL clearance records attach to the exact risk-bearing candidate and record whether a protected trust boundary was actually cleared. A blank or NOT_RUN clearance cannot be inferred from a green local build. After a new commit, inherit only evidence whose checked dependency paths and assumptions remain unchanged. Runtime evidence stays tied to the artifact/configuration it actually tested.
 
 ## Privacy
 
