@@ -55,18 +55,18 @@ Avoid "fix everything," unbounded audits and implementation by reviewer.
 - **Local error:** Affected test + directly coupled regression.
 - **Shared API/auth/model change:** Enumerate all consumers of changed permission/model, run positive and denial tests across roles.
 - **Money/state/persistence change:** Transaction, replay, compensation, audit and restart checks.
-- **At critical pre-integration boundary:** Focused nonauthor inspection and negative tests before sensitive source can join isolated integration; repeat only if the risk-bearing contract or affected code changes.
+- **At HIGH-protected/CRITICAL pre-integration boundary:** Keep `PRE_INTEGRATION_HOLD=ACTIVE` until a nonauthor reviewer supplies exact-SHA `SECURITY_CLEARANCE` or applicable financial/migration clearance with observed negative checks. The integration owner must verify the clearance; reopen it if the risk-bearing code or contract changes.
 - **At integrated feature acceptance:** Independent review of the frozen integrated SHA and appropriate actual runtime/user journeys. A session-end, new commit or routine branch handback does not trigger formal review by itself.
 
-Never inherit a PASS for code that has changed on that test's dependency path. Never rerun all suites reflexively if a narrow test change is demonstrably isolated.
+Never inherit a PASS for code that has changed on that test's dependency path. **For MEDIUM/HIGH/CRITICAL features, rerun every defined primary user journey and feature-contract acceptance assertion (including relevant denial paths) on the final integrated SHA after the last rework**, regardless of the writer's isolation claim. Other repository-wide suites remain selected by changed dependencies and risk; mandatory installed/real-browser proof that cannot execute remains NOT_RUN/HOLD, never assumed PASS.
 
 ## Re-review scope after rework
 
 - A localized code correction inside the approved contract gets focused self-validation and mechanical CI; it does **not** require a fresh maintainer GO.
 - If a formal independent finding is addressed, the nonauthor reviewer checks the changed defect/risk surface and its directly coupled regressions before declaring that finding closed. This can be a targeted follow-up on the **same integrated feature review**, not a new whole-feature acceptance cycle.
-- If source changes outside reviewed dependencies, preserve earlier accepted findings where still valid, then independently review the new affected surface. If critical trust/data/financial boundaries change, reopen the applicable pre-integration security hold.
+- If source changes outside reviewed dependencies, preserve earlier accepted findings where still valid, then independently review the new affected surface. If a HIGH-protected/CRITICAL trust, data, financial or migration boundary changes, reopen the applicable pre-integration clearance and keep the slice held until a new exact-SHA nonauthor disposition exists.
 - If the approved business contract or protected invariant changes, obtain the specific Engineer/process-owner decision and reauthorize only affected scope. Keep safe independent work active.
-- After rework, only an updated integrated SHA and currently valid evidence can receive feature acceptance. Runtime/installed acceptance and release authorization remain separate.
+- After rework, only an updated integrated SHA with its complete required feature-journey suite and currently valid evidence can receive feature acceptance. Runtime/installed acceptance and release authorization remain separate.
 
 ## Review dispositions
 
