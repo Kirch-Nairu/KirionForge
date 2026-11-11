@@ -52,6 +52,10 @@ A named agent can perform a role, but the role is not owned by a model or produc
 6. **Repair precisely if necessary.** Correct the defect or obtain a changed contract; preserve valid findings and rerun only impacted tests/review areas. Material changes affecting a protected invariant reopen the corresponding risk review.
 7. **Accept the feature, then separately authorize release.** Only the Engineer or delegated project authority makes the release decision for the exact verified artifact. Installed/manual, client and production controls remain distinct.
 
+## Feature size and reviewer capacity
+
+A feature is the smallest **client-demonstrable, end-to-end behavior** that can be integrated and assessed coherently. Do not accumulate an entire sprint or unrelated workflows into one giant acceptance diff. If an integrated change exceeds what an independent reviewer can reliably inspect, split it into traceable contract/permission/data/UI review partitions against the **same frozen integrated SHA**, or split the feature into smaller independently testable vertical outcomes. Recombine the findings in one feature disposition; never infer whole-feature approval from a truncated or sampled review. Critical-risk boundaries cannot be omitted by partitioning.
+
 ## Mechanical checks versus judgment gates
 
 **Repeatable per-candidate checks:** source/branch ancestry; path ownership and scope; formatting/typecheck/build; focused tests; security negatives tied to changed surfaces; dependency/consumer compatibility; evidence validity and exact SHA. These may fail and block integration without requiring a new approval ceremony.
